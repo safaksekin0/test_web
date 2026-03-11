@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #38bdf8;
+      --border: rgba(255,255,255,0.18);
+      --ink:    #f0fdfa;
+      --muted:  rgba(240,253,250,0.5);
+      --surface: rgba(255,255,255,0.07);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background-image: url('images/login.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      position: relative;
+      filter: saturate(0.6) hue-rotate(185deg) brightness(0.8);
+    }
+
+    /* Restore normal colors for the login card */
+    .login-wrap { filter: saturate(1.6) hue-rotate(-185deg) brightness(1.25); position: relative; z-index: 2; }
+
+    /* Decorative corner lines */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      width: 100px; height: 100px;
+      border: 1px solid var(--border);
+      pointer-events: none;
+    }
+    body::before { top: 22px; left: 22px; border-right: none; border-bottom: none; z-index: 1; }
+    body::after  { bottom: 22px; right: 22px; border-left: none; border-top: none; z-index: 1; }
+
+    .login-wrap {
+	  width: 100%;
+	  max-width: 480px;
+	  padding: 1rem;
+	  animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) both;
+	}
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-card {
+      background: rgba(3, 80, 160, 0.60);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem 2.75rem 2.5rem;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+	  width: 500px;
+	  position: relative;
+	  z-index: 2;
+    }
+
+    .brand-dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-bottom: 1.6rem;
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .login-card h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+      color: var(--ink);
+    }
+
+    .login-card h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .login-card .subtitle {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.2rem;
+    }
+
+    .field-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .field-group input {
+	  width: 100%;
+	  padding: 0.85rem 1.25rem; 
+	  border: 1px solid rgba(255, 255, 255, 0.1); 
+	  border-radius: 10px; 
+	  
+	  background: rgba(255, 255, 255, 0.05);
+	  box-shadow: 
+		inset 0 2px 4px rgba(0, 0, 0, 0.15), 
+		0 4px 15px rgba(0, 0, 0, 0.1);      
+		
+	  font-family: 'DM Sans', sans-serif;
+	  font-size: 1rem;
+	  color: #ffffff;
+	  outline: none;
+	  backdrop-filter: blur(5px); 
+	  transition: all 0.3s ease;
+	}
+
+	.field-group input:focus {
+	  background: rgba(255, 255, 255, 0.1);
+	  border-color: rgba(255, 255, 255, 0.4);
+	  
+	  box-shadow: 
+		inset 0 2px 4px rgba(0, 0, 0, 0.1),
+		0 0 15px rgba(255, 255, 255, 0.15); 
+	  
+	  transform: translateY(-1px); 
+	}
+
+    .field-group input::placeholder { color: rgba(240,253,250,0.25); }
+
+    .field-group input:focus {
+      border-color: var(--accent);
+      background: rgba(56,189,248,0.07);
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+    }
+
+    .btn-login {
+      width: 100%;
+      margin-top: 0.6rem;
+      padding: 0.85rem;
+      background: var(--accent);
+      color: #0c4a6e;
+      border: none;
+      border-radius: 7px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+      box-shadow: 0 4px 18px rgba(56,189,248,0.3);
+    }
+
+    .btn-login:hover {
+      background: #7dd3fc;
+      box-shadow: 0 6px 24px rgba(56,189,248,0.45);
+    }
+
+    .btn-login:active { transform: translateY(1px); }
+
+    .error-msg {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.65rem 1rem;
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.35);
+      border-radius: 7px;
+      font-size: 0.82rem;
+      color: #fca5a5;
+      text-align: center;
+    }
+
+    .error-msg.show {
+      display: block;
+      animation: shake 0.3s ease;
+    }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25%      { transform: translateX(-6px); }
+      75%      { transform: translateX(6px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="brand-dot"></div>
+      <h1><em></em>Hoşgeldiniz</h1>
+      <p class="subtitle"></p>
+
+      <div class="field-group">
+        <label for="username">Kullanıcı Adı</label>
+        <input type="text" id="username" placeholder="Kullanıcı adınızı giriniz" autocomplete="username">
+      </div>
+
+      <div class="field-group">
+        <label for="password">Şifre</label>
+        <input type="password" id="password" placeholder="Bugün birşeylere başlamak için güzel bir gün" autocomplete="current-password"
+               onkeydown="if(event.key==='Enter') login()">
+      </div>
+
+      <button class="btn-login" onclick="login()">Giriş Yap →</button>
+      <div class="error-msg" id="error-msg">Yanlış kullanıcı adı veya şifre.</div>
+    </div>
+  </div>
+
+  <script src="sc1.js"></script>
+</body>
+</html>
